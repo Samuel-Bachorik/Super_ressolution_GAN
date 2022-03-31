@@ -1,4 +1,5 @@
 # Super_ressolution_GAN
+###Custom dataset loader and dataset processing, custom models
 Neural network trained for upscaling images<br/>
 Result of my test model, without validate set used for saving model<br/>
 Right now training of 8x upsample is in progress<br/>
