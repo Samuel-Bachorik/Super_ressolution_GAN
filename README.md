@@ -1,5 +1,6 @@
 # Super_ressolution_GAN
-###Custom dataset loader and dataset processing, custom models
+### Custom dataset loader and dataset processing, custom models and improved MSE Loss with Sobel operator
+
 Neural network trained for upscaling images<br/>
 Result of my test model, without validate set used for saving model<br/>
 Right now training of 8x upsample is in progress<br/>
