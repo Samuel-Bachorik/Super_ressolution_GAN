@@ -5,18 +5,17 @@ import numpy
 from concurrent.futures import ThreadPoolExecutor
 import multiprocessing
 
-"""
-Images loader class is used to read images from a folder and to transform them into a numpy matrix,
-this class automatically creates images and labels for the network from high-resolution images 
-
-Parameters info
-Path = path to your floder with images             type: str
-in_ress = required input ressolution for model     type: int
-out_ress = required output ressolution from model  type: int
-
-"""
-
 class ImagesLoader:
+    """
+    Images loader class is used to read images from a folder and to transform them into a numpy matrix,
+    this class automatically creates images and labels for the network from high-resolution images 
+
+    Parameters info
+    Path = path to your floder with images             type: str
+    in_ress = required input ressolution for model     type: int
+    out_ress = required output ressolution from model  type: int
+
+    """
     def __init__(self, path,in_ress,out_ress):
         self.path       = path
         self.in_ress    = in_ress
