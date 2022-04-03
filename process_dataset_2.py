@@ -5,26 +5,25 @@ from load_images import ImagesLoader
 import concurrent.futures
 from concurrent.futures import ThreadPoolExecutor
 
-"""
-The process images class is designed to create augmentations for training data and to create
-a batches during training, this class works with the Imagesloadere class. This class contains 
-the get_training_batch function you should call during training. 
-
-Parameters info
-training_path   = String path to your floder with train images          type: str
-testing_path    = String path to your floder with test images           type: str
-validate_path   = String path to your floder with validate images       type: str
-in_ress         = required input ressolution for model                  type: int
-out_ress        = required output ressolution from model                type: int
-
-
-aug_count = number which represents the number of 
-dataset augmentations, number 5 mean you will get   
-5x training data (rotated, changed brightness and 
-contrast, flip).                                    type: int
-"""
-
 class Process_dataset:
+    """
+    The process images class is designed to create augmentations for training data and to create
+    a batches during training, this class works with the Imagesloadere class. This class contains 
+    the get_training_batch function you should call during training. 
+
+    Parameters info
+    training_path   = String path to your floder with train images          type: str
+    testing_path    = String path to your floder with test images           type: str
+    validate_path   = String path to your floder with validate images       type: str
+    in_ress         = required input ressolution for model                  type: int
+    out_ress        = required output ressolution from model                type: int
+
+
+    aug_count = number which represents the number of 
+    dataset augmentations, number 5 mean you will get   
+    5x training data (rotated, changed brightness and 
+    contrast, flip).                                    type: int
+    """
     def __init__(self, in_ress, out_ress, training_path, aug_count, testing_path= False, validate_path= False):
         self.in_ress           = in_ress
         self.out_ress          = out_ress
