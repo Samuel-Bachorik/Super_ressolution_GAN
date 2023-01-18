@@ -37,15 +37,15 @@ class ContentLoss(nn.Module):
 
 
 def main():
-    batch_size      = 38
-    best_loss_train = 99999.0
-    best_psnr_train = 0.0
-    best_loss_val   = 99999.0
-    best_psnr_val   = 0.0
-    epochs          = 9
-    upsample        = 4
-    training_path   = ("C:/Users/Samuel/PycharmProjects/Super_ressolution/cropped")
-    validate_path   = ("C:/Users/Samuel/PycharmProjects/Super_ressolution/validate_crop")
+    batch_size          = 38
+    best_loss_train     = 99999.0
+    best_psnr_train     = 0.0
+    best_loss_val       = 99999.0
+    best_psnr_val       = 0.0
+    epochs              = 9
+    upsample            = 4
+    training_path       = ("C:/Users/Samuel/PycharmProjects/Super_ressolution/cropped")
+    validate_path       = ("C:/Users/Samuel/PycharmProjects/Super_ressolution/validate_crop")
 
     loader = Process_dataset(in_ress=64, out_ress=64 * upsample, training_path=training_path,
                              aug_count=2, validate_path=validate_path)
@@ -56,17 +56,17 @@ def main():
     loss_chart_disc     = CreateGraph(batch_count_train, "Discriminator loss")
     psnr_chart_val      = CreateGraph(batch_count_val, "Validate PSNR")
 
-    generator = Generator().to("cuda")
-    PATH      = './Ich_generator_PSNR.pth'
+    generator           = Generator().to("cuda")
+    PATH                = './Ich_generator_PSNR.pth'
     generator.load_state_dict(torch.load(PATH))
 
-    discriminator = Discriminator().to("cuda")
+    discriminator       = Discriminator().to("cuda")
 
-    g_optimizer = optim.Adam(generator.parameters(), lr=0.0001, betas=(0.9, 0.999))
-    d_optimizer = optim.Adam(discriminator.parameters(), lr=0.0001, betas=(0.9, 0.999))
+    g_optimizer         = optim.Adam(generator.parameters(), lr=0.0001, betas=(0.9, 0.999))
+    d_optimizer         = optim.Adam(discriminator.parameters(), lr=0.0001, betas=(0.9, 0.999))
 
-    d_scheduler = lr_scheduler.StepLR(d_optimizer, epochs // 2, 0.1)
-    g_scheduler = lr_scheduler.StepLR(g_optimizer, epochs // 2, 0.1)
+    d_scheduler         = lr_scheduler.StepLR(d_optimizer, epochs // 2, 0.1)
+    g_scheduler         = lr_scheduler.StepLR(g_optimizer, epochs // 2, 0.1)
 
     psnr_criterion, pixel_criterion, content_criterion, adversarial_criterion = define_loss()
 
@@ -107,10 +107,10 @@ def save_model(model,path,):
     print("Model {} saved ".format(path))
 
 def define_loss() -> [nn.MSELoss, nn.MSELoss, ContentLoss, nn.BCEWithLogitsLoss]:
-    psnr_criterion = nn.MSELoss().to("cuda")
-    pixel_criterion = nn.MSELoss().to("cuda")
-    content_criterion = ContentLoss().to("cuda")
-    adversarial_criterion = nn.BCEWithLogitsLoss().to("cuda")
+    psnr_criterion          = nn.MSELoss().to("cuda")
+    pixel_criterion         = nn.MSELoss().to("cuda")
+    content_criterion       = ContentLoss().to("cuda")
+    adversarial_criterion   = nn.BCEWithLogitsLoss().to("cuda")
 
     return psnr_criterion, pixel_criterion, content_criterion, adversarial_criterion
 
