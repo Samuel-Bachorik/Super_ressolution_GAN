@@ -31,13 +31,14 @@ def main():
     psnr_chart_val      = CreateGraph(batch_count_val, "Validate PSNR")
 
     mse_loss            = nn.MSELoss()
-    generator = Generator().to("cuda")
-    PATH      = './Ich_generator_PSNR.pth'
+    generator           = Generator().to("cuda")
+    PATH                = './Ich_generator_PSNR.pth'
+    
     generator.load_state_dict(torch.load(PATH))
 
-    g_optimizer = optim.Adam(generator.parameters(), lr=0.0001, betas=(0.9, 0.999))
+    g_optimizer         = optim.Adam(generator.parameters(), lr=0.0001, betas=(0.9, 0.999))
 
-    scaler = amp.GradScaler()
+    scaler              = amp.GradScaler()
 
     for epoch in range(epochs):
         psnr_train, loss_train = train_model(generator, g_optimizer,mse_loss, loader, batch_size, scaler,
